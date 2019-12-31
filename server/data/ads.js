@@ -5,8 +5,7 @@
 // 	housetype:'',
 // 	location:'',
 // }
-
-export const adsData = {
+const adsData = {
 	"adsDetails" : [
 		{
 			"title" : "Organized Bungalow",
@@ -32,3 +31,5 @@ export const adsData = {
 
 	]
 }
+
+module.exports = adsData;

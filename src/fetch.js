@@ -2,7 +2,7 @@
 import store from './store/store';
 
 
-export class FetchAPI {
+export default class FetchAPI {
 
     static async postData(url = ``, data = {}, passRefreshToken = false) {
 

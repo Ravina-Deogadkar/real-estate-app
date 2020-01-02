@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+var adsData = require('../data/ads');
+
+/* GET ads listing. */
 router.get('/', function(req, res, next) {
-  res.send('ads created successfully');
+	if(adsData !== undefined && adsData.length !== 0 )
+		res.status(200).send(adsData);
+	else
+		res.status(500).send("No ads data found");
 });
 
+
+router.post('/create', function(req, res, next) {
+	res.send('ads successfully created');
+});
 module.exports = router;

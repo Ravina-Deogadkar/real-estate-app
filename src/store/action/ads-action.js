@@ -1,3 +1,5 @@
+import FetchAPI from "../../fetch";
+import config from "../../config";
 // action types
 
 export const createAds = (data) => {
@@ -7,10 +9,10 @@ export const createAds = (data) => {
     }
 }
 
-export const getAds = () => {
+export const getAds = (data) => {
     return {
         type: 'SHOW_ADS',
-        value: ''
+        value: data
     }
 }
 // action creator
@@ -22,7 +24,20 @@ export const createAdsAction = (data) => {
 }
 
 export const getAdsAction = () => {
+
+	
+	
     return async dispatch =>{
-        dispatch(getAds());
+		const url = config.HostURL + '/ads';
+	FetchAPI.get(url)
+		.then(data => {
+			//dispatch(getMaterials(data.materials));
+			dispatch(getAds(data));
+		})
+		.catch(error => {
+			console.error(error);
+		});
+	
+        
     }
 }

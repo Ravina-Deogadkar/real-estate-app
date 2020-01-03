@@ -24,9 +24,16 @@ function adsReducer(state = initialState, action) {
                 }
             }
         case "SHOW_ADS":
+			if (action.value) {
             return {
-                ...state
-            }
+				...state,
+				...action.value
+			}
+		}else{
+			return{
+				...state
+			}
+		}
         default: break;
     }
     // if (action.type === CREATE_ADS) {

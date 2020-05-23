@@ -6,30 +6,90 @@
 // 	location:'',
 // }
 const adsData = {
-	"adsDetails" : [
-		{
-			"title" : "Organized Bungalow",
-			"price" : "55,00,000",
-			"floorspace" : "5500sqft",
-			"housetype" : "Bungalow",
-			"location" : "Mumbai"
-		},
-		{
-			"title" : "Organized Bungalow",
-			"price" : "75,00,000",
-			"floorspace" : "6500sqft",
-			"housetype" : "Bungalow",
-			"location" : "Bangalore"
-		},
-		{
-			"title" : "Organized Flat",
-			"price" : "50,00,000",
-			"floorspace" : "3500sqft",
-			"housetype" : "Flat",
-			"location" : "Mumbai"
-		}
+  adsDetails: [
+    {
+      title: "Organized Bungalow",
+      price: "55,00,000",
+      floorspace: "5500sqft",
+      housetype: "Bungalow",
+      location: "Mumbai",
+      image: "/images/Ads.jpg",
+      category: "shortStay",
+    },
+    {
+      title: "Organized Bungalow",
+      price: "75,00,000",
+      floorspace: "6500sqft",
+      housetype: "Bungalow",
+      location: "Bangalore",
+      image: "/images/Ads.jpg",
+      category: "shortStay",
+    },
+    {
+      title: "Organized Flat",
+      price: "50,00,000",
+      floorspace: "3500sqft",
+      housetype: "Flat",
+      location: "Mumbai",
+      image: "/images/Ads.jpg",
+      category: "shortStay",
+    },
+    {
+      title: "Organized Flat",
+      price: "50,00,000",
+      floorspace: "3500sqft",
+      housetype: "Flat",
+      location: "Bangalore",
+      image: "/images/Ads.jpg",
+      category: "shortStay",
+    },
+    {
+      title: "Organized Bungalow",
+      price: "65,00,000",
+      floorspace: "6500sqft",
+      housetype: "Bungalow",
+      location: "Bangalore",
+      image: "/images/Ads.jpg",
+      category: "shortStay",
+    },
+    {
+      title: "Organized Bungalow",
+      price: "65,00,000",
+      floorspace: "6500sqft",
+      housetype: "Bungalow",
+      location: "Mumbai",
+      image: "/images/Ads.jpg",
+      category: "shortStay",
+    },
+    {
+      title: "Organized Bungalow",
+      price: "25,00,000",
+      floorspace: "2500sqft",
+      housetype: "Bungalow",
+      location: "Pune",
+      image: "/images/Ads.jpg",
+      category: "rent",
+    },
+    {
+      title: "Organized Bungalow",
+      price: "45,00,000",
+      floorspace: "4500sqft",
+      housetype: "Bungalow",
+      location: "Bangalore",
+      image: "/images/Ads.jpg",
+      category: "rent",
+    },
 
-	]
-}
+    {
+      title: "Organized Bungalow",
+      price: "65,00,000",
+      floorspace: "5500sqft",
+      housetype: "Bungalow",
+      location: "Pune",
+      image: "/images/Ads.jpg",
+      category: "sell",
+    },
+  ],
+};
 
 module.exports = adsData;

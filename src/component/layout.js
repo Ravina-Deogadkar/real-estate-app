@@ -19,6 +19,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 const CreateAdds = lazy(() => import("../templates/create-adds"));
 const ShowAdds = lazy(() => import("../templates/show-adds"));
+const Login = lazy(() => import("../templates/login"));
 
 const drawerWidth = 240;
 
@@ -139,7 +140,11 @@ function Layout(props) {
                 About us
               </ColorButton>
 
-              <ColorButton color="primary" className={classes.margin} href="/">
+              <ColorButton
+                color="primary"
+                className={classes.margin}
+                href="/signin"
+              >
                 Log In
               </ColorButton>
 
@@ -193,6 +198,7 @@ function Layout(props) {
               <Switch>
                 <Route exact path="/" component={ShowAdds} />
                 <Route path="/createadds" component={CreateAdds} />
+                <Route path="/signin" component={Login} />
               </Switch>
             </Suspense>
           </React.Fragment>

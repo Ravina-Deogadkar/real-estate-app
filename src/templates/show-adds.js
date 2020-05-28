@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 import { getAdsAction } from "../store/action/ads-action";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardImage from "../image/Ads.jpg";
+import Adcards from "../component/Adcards";
 
 const useStyles = (theme) => ({
   root: {
@@ -37,37 +32,22 @@ class ShowAdds extends Component {
     this.props.getAdsAction_action();
     console.log(this.props);
   }
+
   render() {
     const { classes, adsDetails } = this.props;
     // this.AdsData = this.props;
     console.log(adsDetails);
+
     return (
       <React.Fragment>
         <h2>Short Stay</h2>
         <div className={classes.root}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Card className={classes.card}>
-                <CardHeader title={adsDetails.title} />
-                <CardMedia
-                  className={classes.media}
-                  image={CardImage}
-                  title="Ads"
-                />
-
-                <CardContent>
-                  <Typography variant="h5" component="h2">
-                    {adsDetails.housetype}
-                  </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    {adsDetails.price}
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                    {adsDetails.location}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+          <Grid container style={{ margin: "auto" }} spacing={2}>
+            {adsDetails.map((value, index) => (
+              <Grid item xs={10} sm={6} lg={5} key={index}>
+                <Adcards adsData={value} />
+              </Grid>
+            ))}
           </Grid>
         </div>
       </React.Fragment>
@@ -76,7 +56,7 @@ class ShowAdds extends Component {
 }
 
 ShowAdds.propTypes = {
-  adsDetails: PropTypes.object,
+  adsDetails: PropTypes.array,
   getAdsAction_action: PropTypes.func,
 };
 const mapStateToProps = (state) => {

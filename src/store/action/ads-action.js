@@ -29,21 +29,15 @@ export const getAdsAction = () => {
   return async (dispatch) => {
     const url = config.HostURL + "/ads";
 
-    // fetch(url,{method: "GET",mode: "no-cors", headers:{"Content-Type": "application/json; charset=utf-8"}})
-    // .then(data => {
-    // 	console.log("Adds details included");
-    // 	console.log(data);
-    // 	//dispatch(getMaterials(data.materials));
-    // 	dispatch(getAds(data));
-    // })
-    // .catch(error => {
-    // 	console.error(error);
-    // });
-
     Axios.get(url)
       .then(({ data }) => {
-        console.log(data.adsDetails);
-        dispatch(getAds(data));
+        const adsDetails = [];
+        data.adsDetails.map((value, index) => {
+          adsDetails[index] = value;
+          adsDetails[index].image = config.HostURL + value.image;
+        });
+        console.log(adsDetails);
+        dispatch(getAds(adsDetails));
       })
       .catch((error) => {
         console.error(error);

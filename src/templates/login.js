@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { verifyUserAction } from "../store/action/user-login";
 
 const useStyles = (theme) => ({
   root: {
@@ -17,7 +21,29 @@ class Login extends Component {
   constructor(props) {
     super(props);
     console.log("create");
+    this.state = {
+      username: "",
+      password: "",
+    };
   }
+
+  handleChange = (name) => (event) => {
+    var value = event.target.value;
+    var curState = this.state;
+    if (name == "username") {
+      curState.username = value;
+      this.setState(curState);
+    }
+
+    if (name == "password") {
+      curState.password = value;
+      this.setState(curState);
+    }
+  };
+
+  verifyUser = () => {
+    this.props.verifyUser_action(this.state);
+  };
   render() {
     const classes = this.props;
     return (
@@ -33,6 +59,7 @@ class Login extends Component {
             label="Username"
             fullWidth
             className={classes.textField}
+            onChange={this.handleChange("username")}
             margin="normal"
           />
           <TextField
@@ -41,12 +68,30 @@ class Login extends Component {
             fullWidth
             type="password"
             className={classes.textField}
+            onChange={this.handleChange("password")}
             margin="normal"
           />
+        </div>
+        <div>
+          <Button
+            variant="outlined"
+            className={classes.button}
+            onClick={this.verifyUser}
+          >
+            Sign In
+          </Button>
         </div>
       </div>
     );
   }
 }
+Login.propTypes = {
+  verifyUser_action: PropTypes.func,
+};
 
-export default withStyles(useStyles)(Login);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    verifyUser_action: (data) => dispatch(verifyUserAction(data))
+  }
+}
+export default connect(mapDispatchToProps)(withStyles(useStyles)(Login));

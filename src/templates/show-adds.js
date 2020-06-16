@@ -20,17 +20,16 @@ class ShowAdds extends Component {
     super(props);
     console.log("show details");
     // var AdsData;
-    // this.state={
-    //     adsDetails:{
-
-    //     }
-    // }
+    // this.state = {
+    //   adsDetails: {},
+    // };
     // console.log(this.state);
   }
 
   componentDidMount() {
     this.props.getAdsAction_action();
     console.log(this.props);
+    //this.setState(adsDetails);
   }
 
   render() {
@@ -59,6 +58,21 @@ ShowAdds.propTypes = {
   adsDetails: PropTypes.array,
   getAdsAction_action: PropTypes.func,
 };
+
+ShowAdds.defaultProps = {
+  adsDetails: [
+    {
+      title: "Organized Bungalow",
+      price: "55,00,000",
+      floorspace: "5500sqft",
+      housetype: "Bungalow",
+      location: "Mumbai",
+      image: "/images/Ads.jpg",
+      category: "shortStay",
+    },
+  ],
+};
+
 const mapStateToProps = (state) => {
   return {
     adsDetails: state.adsDetails,

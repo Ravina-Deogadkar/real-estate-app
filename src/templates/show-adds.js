@@ -5,49 +5,87 @@ import { getAdsAction } from "../store/action/ads-action";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Adcards from "../component/Adcards";
+import config from "../config";
+import Axios from "axios";
 
 const useStyles = (theme) => ({
   root: {
     display: "flex",
-    marginLeft: "10%",
+    marginLeft: "5%",
+    marginRight: "5%",
   },
   card: {
     padding: "5%",
+  },
+  cover: {
+    // boxShadow: "0px 4px 3px rgba(174, 181, 178, 0.4)",
+    //  borderRadius: 10,
+    margin: "auto",
+    paddingBottom: "50px",
+  },
+
+  header: {
+    color: "rgba(63, 81, 181, 1)",
+    boxShadow: "0px 4px 3px rgba(202, 203, 210, 1)",
+    padding: "10px",
   },
 });
 class ShowAdds extends Component {
   constructor(props) {
     super(props);
-    console.log("show details");
-    // var AdsData;
-    // this.state = {
-    //   adsDetails: {},
-    // };
-    // console.log(this.state);
   }
 
-  componentDidMount() {
-    this.props.getAdsAction_action();
-    console.log(this.props);
-    //this.setState(adsDetails);
-  }
+  fetchAdsCard = async () => {
+    const url = config.HostURL + "/ads";
+
+    let data = await Axios.get(url);
+    const adsDetails = [];
+    console.log(data.data.adsDetails);
+    if (data.data.adsDetails != undefined) {
+      data.data.adsDetails.map((value, index) => {
+        if (index < 6) {
+          adsDetails[index] = value;
+          adsDetails[index].image = config.HostURL + value.image;
+        }
+      });
+    }
+    const obj = { adsDetails: adsDetails };
+    this.props.getAdsAction_action(obj);
+  };
 
   render() {
     const { classes, adsDetails } = this.props;
     // this.AdsData = this.props;
+    if (adsDetails == undefined || adsDetails[0].title.length == 0)
+      this.fetchAdsCard();
+    console.log("Ads details:");
     console.log(adsDetails);
 
     return (
       <React.Fragment>
-        <h2>Short Stay</h2>
-        <div className={classes.root}>
-          <Grid container style={{ margin: "auto" }} spacing={2}>
-            {adsDetails.map((value, index) => (
-              <Grid item xs={10} sm={6} lg={5} key={index}>
-                <Adcards adsData={value} />
-              </Grid>
-            ))}
-          </Grid>
+        <div className={classes.cover}>
+          <h2 className={classes.header}>Short Stay</h2>
+          <div className={classes.root}>
+            <Grid container style={{ margin: "auto" }} spacing={2}>
+              {adsDetails.map((value, index) => (
+                <Grid item xs={3} sm={3} lg={4} key={index}>
+                  <Adcards adsData={value} />
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        </div>
+        <div className={classes.cover}>
+          <h2 className={classes.header}>Recommended</h2>
+          <div className={classes.root}>
+            <Grid container style={{ margin: "auto" }} spacing={2}>
+              {adsDetails.map((value, index) => (
+                <Grid item xs={3} sm={3} lg={4} key={index}>
+                  <Adcards adsData={value} />
+                </Grid>
+              ))}
+            </Grid>
+          </div>
         </div>
       </React.Fragment>
     );
@@ -81,7 +119,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAdsAction_action: () => dispatch(getAdsAction()),
+    getAdsAction_action: (data) => dispatch(getAdsAction(data)),
   };
 };
 

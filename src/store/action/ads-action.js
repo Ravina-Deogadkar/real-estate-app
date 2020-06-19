@@ -25,22 +25,9 @@ export const createAdsAction = (data) => {
   };
 };
 
-export const getAdsAction = () => {
+export const getAdsAction = (data) => {
   return async (dispatch) => {
-    const url = config.HostURL + "/ads";
-
-    Axios.get(url)
-      .then(({ data }) => {
-        const adsDetails = [];
-        data.adsDetails.map((value, index) => {
-          adsDetails[index] = value;
-          adsDetails[index].image = config.HostURL + value.image;
-        });
-        console.log(adsDetails);
-        dispatch(getAds(adsDetails));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    
+    dispatch(getAds(data));
   };
 };

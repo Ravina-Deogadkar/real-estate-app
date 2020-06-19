@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
   card: {
     padding: "5%",
   },
+  media: {
+    height: 140,
+  },
 }));
 
 export default function Adscards(props) {

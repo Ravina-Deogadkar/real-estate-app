@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import Adcards from "../component/Adcards";
 import config from "../config";
 import Axios from "axios";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = (theme) => ({
   root: {
@@ -28,6 +29,23 @@ const useStyles = (theme) => ({
     color: "rgba(63, 81, 181, 1)",
     boxShadow: "0px 4px 3px rgba(202, 203, 210, 1)",
     padding: "10px",
+    fontSize: "large",
+    maxWidth: "60%",
+    flexGrow: 0,
+    flexBasis: "60%",
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  location: {
+    // display: "inline",
+    Width: "auto",
+    padding: "2%",
+    float: "left",
+  },
+  headerCover: {
+    display: "flex",
   },
 });
 class ShowAdds extends Component {
@@ -64,7 +82,19 @@ class ShowAdds extends Component {
     return (
       <React.Fragment>
         <div className={classes.cover}>
-          <h2 className={classes.header}>Short Stay</h2>
+          <div className={classes.headerCover}>
+            <div className={classes.header}>Short Stay</div>
+            <div className={classes.location}>
+              <TextField
+                id="outlined-name"
+                label="Location"
+                className={classes.textField}
+                // value={this.state.adsDetails.title}
+                // onChange={this.handleChange("title")}
+                margin="normal"
+              />
+            </div>
+          </div>
           <div className={classes.root}>
             <Grid container style={{ margin: "auto" }} spacing={2}>
               {adsDetails.map((value, index) => (
@@ -76,7 +106,8 @@ class ShowAdds extends Component {
           </div>
         </div>
         <div className={classes.cover}>
-          <h2 className={classes.header}>Recommended</h2>
+          <div className={classes.header}>Recommended</div>
+
           <div className={classes.root}>
             <Grid container style={{ margin: "auto" }} spacing={2}>
               {adsDetails.map((value, index) => (

@@ -6,11 +6,12 @@ import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { verifyUserAction } from "../store/action/user-login";
+import { CenterFocusStrong } from "material-ui-icons";
 
 const useStyles = (theme) => ({
   root: {
-    display: "flex",
-    marginLeft: "10px",
+    marginLeft: "10%",
+    float: "center",
   },
   card: {
     padding: "5%",
@@ -45,7 +46,7 @@ class Login extends Component {
     this.props.verifyUser_action(this.state);
   };
   render() {
-    const classes = this.props;
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         <div>
@@ -91,7 +92,7 @@ Login.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    verifyUser_action: (data) => dispatch(verifyUserAction(data))
-  }
-}
+    verifyUser_action: (data) => dispatch(verifyUserAction(data)),
+  };
+};
 export default connect(mapDispatchToProps)(withStyles(useStyles)(Login));

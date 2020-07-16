@@ -30,9 +30,9 @@ const useStyles = (theme) => ({
     boxShadow: "0px 4px 3px rgba(202, 203, 210, 1)",
     padding: "10px",
     fontSize: "large",
-    maxWidth: "60%",
+    width: "60%",
     flexGrow: 0,
-    flexBasis: "60%",
+    flexBasis: "80%",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -40,8 +40,8 @@ const useStyles = (theme) => ({
   },
   location: {
     // display: "inline",
-    Width: "auto",
-    padding: "2%",
+    width: "35%",
+    paddingLeft: "2%",
     float: "left",
   },
   headerCover: {

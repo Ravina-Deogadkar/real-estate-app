@@ -47,6 +47,17 @@ function adsReducer(state = initialState, action) {
           ...state,
         };
       }
+    case "SIGN_OUT":
+      if (action.value) {
+        return {
+          ...state,
+          ...action.value,
+        };
+      } else {
+        return {
+          ...state,
+        };
+      }
     default:
       break;
   }

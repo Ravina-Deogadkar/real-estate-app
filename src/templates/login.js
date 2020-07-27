@@ -5,7 +5,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { verifyUserAction } from "../store/action/user-login";
+import {
+  verifyUserAction,
+  signoutUserAction,
+} from "../store/action/user-login";
 import { CenterFocusStrong } from "material-ui-icons";
 
 const useStyles = (theme) => ({
@@ -46,8 +49,71 @@ class Login extends Component {
     var data = { loginDetails: this.state };
     this.props.verifyUser_action(data);
   };
+  removeUser = () => {
+    var data = {
+      loginDetails: {
+        username: "",
+        password: "",
+      },
+    };
+    this.props.signout_action(data);
+  };
   render() {
     const { classes, loginDetails } = this.props;
+    let loggedinView = null;
+    if (
+      (loginDetails !== null ||
+      loginDetails !== undefined) &&
+      loginDetails.Loginstatus === true
+    ) {
+      loggedinView = (
+        <div>
+          <p> User is already logged in, Do you want to SignOut instead? </p>
+          <div>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              onClick={this.removeUser}
+            >
+              Sign Out
+            </Button>
+          </div>
+        </div>
+      );
+    } else {
+      loggedinView = (
+        <main>
+          <div>
+            <TextField
+              id="filled-name"
+              label="Username"
+              fullWidth
+              className={classes.textField}
+              onChange={this.handleChange("username")}
+              margin="normal"
+            />
+            <TextField
+              id="filled-password-input"
+              label="Password"
+              fullWidth
+              type="password"
+              className={classes.textField}
+              onChange={this.handleChange("password")}
+              margin="normal"
+            />
+          </div>
+          <div>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              onClick={this.verifyUser}
+            >
+              Sign In
+            </Button>
+          </div>
+        </main>
+      );
+    }
     return (
       <div className={classes.root}>
         <div>
@@ -55,40 +121,14 @@ class Login extends Component {
             Sign In
           </Typography>
         </div>
-        <div>
-          <TextField
-            id="filled-name"
-            label="Username"
-            fullWidth
-            className={classes.textField}
-            onChange={this.handleChange("username")}
-            margin="normal"
-          />
-          <TextField
-            id="filled-password-input"
-            label="Password"
-            fullWidth
-            type="password"
-            className={classes.textField}
-            onChange={this.handleChange("password")}
-            margin="normal"
-          />
-        </div>
-        <div>
-          <Button
-            variant="outlined"
-            className={classes.button}
-            onClick={this.verifyUser}
-          >
-            Sign In
-          </Button>
-        </div>
+        {loggedinView}
       </div>
     );
   }
 }
 Login.propTypes = {
   verifyUser_action: PropTypes.func,
+  signout_action: PropTypes.func,
 };
 const mapStateToProps = (state) => {
   return {
@@ -99,6 +139,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     verifyUser_action: (data) => dispatch(verifyUserAction(data)),
+    signout_action: (data) => dispatch(signoutUserAction(data)),
   };
 };
 export default connect(

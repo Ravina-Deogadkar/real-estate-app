@@ -10,8 +10,9 @@ export const verifyUser = (data) => {
 
 export const verifyUserAction = (data) => {
   const url = config.HostURL + "/users";
+  console.log("Successful");
+  data.loginDetails["Loginstatus"] = true;
   return (dispatch) => {
     dispatch(verifyUser(data));
   };
-  console.log("Successful");
 };

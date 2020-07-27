@@ -43,10 +43,11 @@ class Login extends Component {
   };
 
   verifyUser = () => {
-    this.props.verifyUser_action(this.state);
+    var data = { loginDetails: this.state };
+    this.props.verifyUser_action(data);
   };
   render() {
-    const { classes } = this.props;
+    const { classes, loginDetails } = this.props;
     return (
       <div className={classes.root}>
         <div>
@@ -89,10 +90,18 @@ class Login extends Component {
 Login.propTypes = {
   verifyUser_action: PropTypes.func,
 };
+const mapStateToProps = (state) => {
+  return {
+    loginDetails: state.loginDetails,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     verifyUser_action: (data) => dispatch(verifyUserAction(data)),
   };
 };
-export default connect(mapDispatchToProps)(withStyles(useStyles)(Login));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(useStyles)(Login));

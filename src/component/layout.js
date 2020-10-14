@@ -21,7 +21,7 @@ const CreateAdds = lazy(() => import("../templates/create-adds"));
 const ShowAdds = lazy(() => import("../templates/show-adds"));
 const Login = lazy(() => import("../templates/login"));
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
       width: drawerWidth,
       flexShrink: 0,
     },
+ 
   },
   appBar: {
     marginLeft: drawerWidth,
@@ -59,7 +60,14 @@ const useStyles = makeStyles((theme) => ({
     // justify
   },
   maincontent: {
-    margin: "10%",
+    [theme.breakpoints.up("md")]: {
+      width: "90%",
+      margin: "10%",
+    },
+    [theme.breakpoints.down("md") && theme.breakpoints.up("sm")]: {
+      marginTop: "100%",
+      margin: "1%",
+    },
   },
   link: {
     textDecoration: "none",
@@ -192,7 +200,7 @@ function Layout(props) {
           </Hidden>
         </nav>
 
-        <main className="maincontent" style={{ marginTop: "7%" }}>
+        <main className={classes.maincontent} style={{ marginTop: "7%" }}>
           <React.Fragment>
             <Suspense fallback={<div></div>}>
               <Switch>

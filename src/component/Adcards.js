@@ -28,19 +28,24 @@ export default function Adscards(props) {
   return (
     <div style={{ paddingTop: "8%" }}>
       <Card className={"MuiProjectCard--01"}>
-        <CardHeader title={adsData.title} className={"MuiCard__head"} />
-        <CardMedia className={classes.media} title="Ads" image={adsData.image} style ={{ width: '30', height: '30' }}/>
+        <CardHeader title={adsData?.title} className={"MuiCard__head"} />
+        <CardMedia
+          className={classes.media}
+          title="Ads"
+          image={adsData?.image}
+          style={{ width: "30", height: "30" }}
+        />
 
         <CardContent className={"MuiCardContent-root"}>
           <div className={"MuiCardContent-inner"}>
             <Typography variant="h5" component="h2">
-              {adsData.housetype}
+              {adsData?.housetype}
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {adsData.price}
+              {adsData?.price}
             </Typography>
             <Typography variant="body2" component="p">
-              {adsData.location}
+              {adsData?.location}
             </Typography>
           </div>
         </CardContent>

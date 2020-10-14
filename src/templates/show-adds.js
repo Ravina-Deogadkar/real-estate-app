@@ -12,8 +12,7 @@ import TextField from "@material-ui/core/TextField";
 const useStyles = (theme) => ({
   root: {
     display: "flex",
-    marginLeft: "5%",
-    marginRight: "5%",
+    
   },
   card: {
     padding: "5%",
@@ -29,10 +28,10 @@ const useStyles = (theme) => ({
     color: "rgba(63, 81, 181, 1)",
     boxShadow: "0px 4px 3px rgba(202, 203, 210, 1)",
     padding: "10px",
-    fontSize: "large",
-    width: "60%",
-    flexGrow: 0,
-    flexBasis: "80%",
+	  fontSize: "large",
+	width: "100%"
+    //flexGrow: 0,
+    // flexBasis: "80%",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -40,12 +39,24 @@ const useStyles = (theme) => ({
   },
   location: {
     // display: "inline",
-    width: "35%",
-    paddingLeft: "2%",
-    float: "left",
+    width: "20%",
   },
   headerCover: {
     display: "flex",
+	  justifyContent: "space-between",
+	  [theme.breakpoints.down("sm") && theme.breakpoints.up("xs")]: {
+		marginTop: "80px",
+	  },
+	  
+	  [theme.breakpoints.down("md") && theme.breakpoints.up("sm")]: {
+		marginTop: "10%",
+	  },
+	  [theme.breakpoints.up("md")]: {
+		marginTop: "2%",
+	  },
+	  [theme.breakpoints.up("lg")]: {
+		marginTop: "0",
+	  },
   },
 });
 class ShowAdds extends Component {
@@ -68,56 +79,81 @@ class ShowAdds extends Component {
       });
     }
     const obj = { adsDetails: adsDetails };
+    console.log(obj);
     this.props.getAdsAction_action(obj);
   };
 
-  render() {
-    const { classes, adsDetails } = this.props;
-    // this.AdsData = this.props;
+  searchAdsCard = (name) => async (event) => {
+    var search = event.target.value;
+
+    console.log(search);
+
+    let data = this.props.adsDetails;
+    const adsDetails = [];
+    console.log(data);
+    if (data != undefined) {
+      data.filter((value, index) => {
+        if (value.location.indexOf(search) != -1) {
+          adsDetails[index] = value;
+          adsDetails[index].image = config.HostURL + value.image;
+        }
+      });
+    }
+    const obj = { adsDetails: adsDetails };
+    console.log(obj);
+    this.props.getAdsAction_action(obj);
+  };
+  componentDidMount() {
+    const { adsDetails } = this.props;
     if (adsDetails == undefined || adsDetails[0].title.length == 0)
       this.fetchAdsCard();
     console.log("Ads details:");
     console.log(adsDetails);
+    this.setState({ fetchComplete: true });
+  }
+  render() {
+    const { classes, adsDetails } = this.props;
+    // this.AdsData = this.props;
 
     return (
       <React.Fragment>
         <div className={classes.cover}>
           <div className={classes.headerCover}>
             <div className={classes.header}>Short Stay</div>
-            <div className={classes.location}>
+            {/* <div className={classes.location}>
               <TextField
                 id="outlined-name"
                 label="Location"
                 className={classes.textField}
                 // value={this.state.adsDetails.title}
-                // onChange={this.handleChange("title")}
+                onChange={this.searchAdsCard("title")}
                 margin="normal"
               />
-            </div>
+            </div> */}
           </div>
           <div className={classes.root}>
             <Grid container style={{ margin: "auto" }} spacing={2}>
               {adsDetails.map((value, index) => (
-                <Grid item xs={3} sm={3} lg={4} key={index}>
+                <Grid item xs={12} sm={6} lg={4} key={index}>
                   <Adcards adsData={value} />
                 </Grid>
               ))}
             </Grid>
           </div>
         </div>
-        <div className={classes.cover}>
+        {/* <div className={classes.cover}>
           <div className={classes.header}>Recommended</div>
 
           <div className={classes.root}>
             <Grid container style={{ margin: "auto" }} spacing={2}>
               {adsDetails.map((value, index) => (
-                <Grid item xs={3} sm={3} lg={4} key={index}>
+                <Grid item xs={12} sm={6}  lg={4} key={index}>
                   <Adcards adsData={value} />
                 </Grid>
               ))}
             </Grid>
           </div>
-        </div>
+        </div> */}
       </React.Fragment>
     );
   }

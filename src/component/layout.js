@@ -21,23 +21,23 @@ const CreateAdds = lazy(() => import("../templates/create-adds"));
 const ShowAdds = lazy(() => import("../templates/show-adds"));
 const Login = lazy(() => import("../templates/login"));
 
-const drawerWidth = 200;
+//const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
- 
-  },
+  //   drawer: {
+  //     [theme.breakpoints.up("sm")]: {
+  //       width: drawerWidth,
+  //       flexShrink: 0,
+  //     },
+
+  //   },
   appBar: {
-    marginLeft: drawerWidth,
+    marginLeft: "2%",
     [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: "100%",
     },
   },
   menuButton: {
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    width: drawerWidth,
+    width: "2%",
   },
   content: {
     flexGrow: 1,
@@ -60,19 +60,21 @@ const useStyles = makeStyles((theme) => ({
     // justify
   },
   maincontent: {
+    margin: "auto",
     [theme.breakpoints.up("md")]: {
       width: "90%",
-      margin: "10%",
     },
     [theme.breakpoints.down("md") && theme.breakpoints.up("sm")]: {
       marginTop: "100%",
-      margin: "1%",
     },
   },
   link: {
     textDecoration: "none",
     cursor: "default",
     color: "white",
+    [theme.breakpoints.up("md")]: {
+      marginLeft: "80px",
+    },
   },
 }));
 
@@ -170,7 +172,7 @@ function Layout(props) {
         </AppBar>
         <nav className={classes.drawer} aria-label="mailbox folders">
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
+          {/* <Hidden smUp implementation="css">
             <Drawer
               container={container}
               variant="temporary"
@@ -186,8 +188,8 @@ function Layout(props) {
             >
               {drawer}
             </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
+          </Hidden> */}
+          {/* <Hidden xsDown implementation="css">
             <Drawer
               classes={{
                 paper: classes.drawerPaper,
@@ -197,7 +199,7 @@ function Layout(props) {
             >
               {drawer}
             </Drawer>
-          </Hidden>
+          </Hidden> */}
         </nav>
 
         <main className={classes.maincontent} style={{ marginTop: "7%" }}>

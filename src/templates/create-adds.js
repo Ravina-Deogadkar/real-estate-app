@@ -21,15 +21,6 @@ const useStyles = (theme) => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
-  dense: {
-    marginTop: theme.spacing(2),
-  },
-  menu: {
-    width: 200,
-  },
-  root: {
-    display: "flex",
-  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -42,8 +33,6 @@ const useStyles = (theme) => ({
     padding: "10px",
     fontSize: "large",
     width: "100%",
-    //flexGrow: 0,
-    // flexBasis: "80%",
   },
   headerCover: {
     display: "flex",
@@ -67,32 +56,20 @@ const useStyles = (theme) => ({
 class CreateAdds extends Component {
   constructor(props) {
     super(props);
-    console.log("create");
-
-    // this.classes = useStyles();
-
     this.state = {
       adsDetails: {},
     };
   }
   handleChange = (name) => (event) => {
-    var value = event.target.value;
-    // console.log(name);
-    // console.log(value);
     let data = this.state.adsDetails;
-    data[name] = value;
+    data[name] = event.target.value;
     this.setState({ adsDetails: data });
-    // console.log(this.state);
   };
   updateState = () => {
-    console.log("updated state");
-    console.log(this.props);
-    // const createAdsAction_action = this.props.createAdsAction;
     this.props.createAdsAction_action(this.state);
   };
   render() {
     const { classes } = this.props;
-    console.log("style class", classes);
     return (
       <Fragment>
         <div className={classes.toolbar} />

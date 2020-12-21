@@ -9,7 +9,6 @@ import {
   verifyUserAction,
   signoutUserAction,
 } from "../store/action/user-login";
-import { CenterFocusStrong } from "material-ui-icons";
 
 const useStyles = (theme) => ({
   root: {
@@ -24,7 +23,6 @@ const useStyles = (theme) => ({
 class Login extends Component {
   constructor(props) {
     super(props);
-    console.log("create");
     this.state = {
       username: "",
       password: "",
@@ -47,7 +45,8 @@ class Login extends Component {
 
   verifyUser = () => {
     var data = { loginDetails: this.state };
-    this.props.verifyUser_action(data);
+	  this.props.verifyUser_action(data);
+	  window.location.replace("/");
   };
   removeUser = () => {
     var data = {
@@ -64,7 +63,7 @@ class Login extends Component {
     if (
       (loginDetails !== null ||
       loginDetails !== undefined) &&
-      loginDetails.Loginstatus === true
+      loginDetails?.Loginstatus === true
     ) {
       loggedinView = (
         <div>
